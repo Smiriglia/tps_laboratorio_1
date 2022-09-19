@@ -1,10 +1,10 @@
 /*
- * utn_getNumero.c
+ * utn.c
  *
  *  Created on: 19 sep. 2022
  *      Author: USUARIO
  */
-#include "utn_getNumero.h"
+#include "utn.h"
 
 static int esNumerica(char* cadena);
 static int getInt(int* pResultado);
@@ -104,4 +104,6 @@ maximo, int reintentos)
 	}
 	return retorno;
 }
+
+
 

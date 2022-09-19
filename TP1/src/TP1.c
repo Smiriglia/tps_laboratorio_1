@@ -11,16 +11,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utn_getNumero.h"
-//aaa
+#include "utn.h"
+
 int main(void) {
+	int retornoIngreso;
 	int respuesta;
-	int numeroIngresado;
 
 	setbuf(stdout, NULL);
 
-	respuesta = utn_getNumero(&numeroIngresado, "Ingrese un numero: ", "ERROR\n", 0, 10, 3);
 
-	printf("retorno: %d \nnumero ingresado: %d",respuesta,numeroIngresado);
+	do
+	{
+
+		retornoIngreso = utn_getNumero(&respuesta, "\t|Menu Principal|\n1 - Ingreso de los costos de Mantenimiento\n2 - Carga de jugadores\n3 - Realizar todos los cálculos\n4 - Informar todos los resultados\n5 - Salir\nEliga su opcion: ", "ERROR, OPCION INVALIDA\n", 0, 5, 3);
+
+
+		if(retornoIngreso == 0)
+		{
+			switch(respuesta)
+			{
+				case 1:
+
+					break;
+
+				case 2:
+
+					break;
+
+				case 3:
+
+					break;
+				case 4:
+
+					break;
+				case 5:
+				{
+					printf("SALIR");
+				}
+			}
+		}
+	}while(respuesta != 5);
+
 	return 0;
 }
