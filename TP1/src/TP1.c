@@ -11,19 +11,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
+#include <ctype.h>
 #include "utn.h"
 #include "menuMundial.h"
 
 int main(void) {
-	int retornoIngreso;
 	int respuesta;
+	int retornoIngreso;
 	float costoHospedaje;
 	float costoComida;
 	float costoTransporte;
 
+	int formacionEquipo[] = {1, 4, 4, 2};//Si cambiamos estos numeros va a afectar a la formacion seleccionada
+	int formacionCargada[] = {0, 0, 0, 0};//[0]Arqueros, [1] Defensores, [2] Mediocampistas, [3] Delanteros
+	int jugadoresPorConfederacion[] = {0, 0, 0, 0, 0, 0};//[0]AFC, [1]CAF, [2]CONCACAF, [3]CONMEBOL, [4]UEFA, [5]OFC;
 	costoHospedaje = 0;
 	costoComida = 0;
 	costoTransporte = 0;
+
 
 	setbuf(stdout, NULL);
 
@@ -31,7 +37,14 @@ int main(void) {
 	do
 	{
 
-		retornoIngreso = utn_getNumero(&respuesta, "\t|Menu Principal|\n1 - Ingreso de los costos de Mantenimiento\n2 - Carga de jugadores\n3 - Realizar todos los cálculos\n4 - Informar todos los resultados\n5 - Salir\nEliga su opcion: ", "ERROR, OPCION INVALIDA\n", 0, 5, 3);
+		retornoIngreso = utn_getNumero(&respuesta, "\t|Menu Principal|\n"
+				"1 - Ingreso de los costos de Mantenimiento\n"
+				"2 - Carga de jugadores\n"
+				"3 - Realizar todos los cálculos\n"
+				"4 - Informar todos los resultados\n"
+				"5 - Salir\nEliga su opcion: ",
+				"\nERROR, OPCION INVALIDA\n", 0, 5, 3);
+		imprimirLinea(35);
 
 		if(retornoIngreso == 0)
 		{
@@ -42,7 +55,7 @@ int main(void) {
 					break;
 
 				case 2:
-
+					cargarJugadores(formacionCargada, formacionEquipo, jugadoresPorConfederacion);
 					break;
 
 				case 3:

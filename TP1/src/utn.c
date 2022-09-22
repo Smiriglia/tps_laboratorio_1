@@ -215,6 +215,33 @@ int utn_getNumeroFloat(float* pResultado, char* mensaje, char* mensajeError, int
 	}
 	return retorno;
 }
+/**
+ * \fn unsigned int verifica(void)
+ * \brief Funcion usada para verificar el ingreso de caracteres.Chequea para que
+solo sean admitidas las letras S o N.
+ *
+ * \return Se ingresa void y devuelve un entero sin signo
+ * 0 si se ingreso la N
+ * 1 si se ingreso la S
+ */
+unsigned int verifica(void)
+{
+	char letra;
+	printf("\nIngrese opcion...S/N?");
+	fflush(stdin);
+	scanf("%c", &letra);
+	letra = toupper(letra);
+	fflush(stdin);
+	while(!((letra=='S')||(letra=='N')))
+	{
+		printf("\nHa ingresado opcion no valida...Reintente el ingreso(S/N)... ");
+		fflush(stdin);
+		scanf("%c", &letra);
+		letra = toupper(letra);
+		fflush(stdin);
+	}
+	return (letra=='S');
+}
 
 
 

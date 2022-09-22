@@ -13,5 +13,7 @@
 #include <string.h>
 
 void ingresarCostosMantenimiento(float* costoHospedaje, float* costoComida, float* costoTransporte);
+void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugadoresPorConfederacion);
+void imprimirLinea(int tamanio);
 
 #endif /* MENUMUNDIAL_H_ */
