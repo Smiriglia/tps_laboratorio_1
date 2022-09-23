@@ -33,7 +33,7 @@ int sumaIntArray(int* pArray, int size)
  */
 float calcularPorcentaje(int cantidad, int total)
 {
-	return cantidad * 100 / total;
+	return (float) cantidad * 100 / total;
 }
 /**
  * \fn float porcientoeDe(float, float)
