@@ -67,7 +67,7 @@ static void cambiarCosto(float* costoACambiar, char* tipoDeCosto)
 	strcat(mensajeIngreso, tipoDeCosto);
 	strcat(mensajeIngreso, ": ");
 
-	retornoIngreso = utn_getNumeroFloat(&costoIngresado, mensajeIngreso,"\nERROR, ingrese un costo positivo\n",1, 1000000,3);
+	retornoIngreso = utn_getNumeroFloat(&costoIngresado, mensajeIngreso,"\nERROR, ingrese un costo positivo\n",1, 214748368,3);
 	if(retornoIngreso == 0)
 	{
 		*costoACambiar = costoIngresado;
@@ -154,6 +154,7 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 		else
 		{
 			printf("ERROR. Ya se han ingresado todos los jugadores\n");
+			break;
 		}
 		imprimirLinea(35);
 		printf("¿Desea seguir ingresando jugadores?");
@@ -178,5 +179,33 @@ void realizarCalculos(
 	{
 		*aumentoAplicado = porcientoeDe(35, costoMantenimiento);
 		*costoNeto = costoMantenimiento + aumentoAplicado[0];
+	}
+}
+void informarResultados(float* promedioPorConfederacion,float costoMantenimiento, float costoNeto, float aumentoAplicado)
+{
+	//[0]promedio de AFC, [1]promedio de CAF, [2]promedio de CONCACAF, [3]promedio de CONMEBOL, [4]promedio de UEFA, [5]promedio de OFC
+	printf("\tInformar Resultados\n\n"
+			"Promedio AFC: %.2f\n"
+			"Promedio CAF: %.2f\n"
+			"Promedio CONCACAF: %.2f\n"
+			"Promedio CONMEBOL: %.2f\n"
+			"Promedio UEFA: %.2f\n"
+			"Promedio OFC: %.2f\n",
+			promedioPorConfederacion[0],
+			promedioPorConfederacion[1],
+			promedioPorConfederacion[2],
+			promedioPorConfederacion[3],
+			promedioPorConfederacion[4],
+			promedioPorConfederacion[5]);
+	if(aumentoAplicado > 0)
+	{
+		printf("El costo de mantenimiento era de: %.2f$ y recibio un aumento de: %.2f$, su nuevo valor es de: %.2f$\n",
+				costoMantenimiento,
+				aumentoAplicado,
+				costoNeto);
+	}
+	else
+	{
+		printf("El costo de mantenimiento es: %.2f$\n",costoMantenimiento);
 	}
 }

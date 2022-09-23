@@ -41,7 +41,7 @@ int main(void) {
 	costoHospedaje = 0;
 	costoComida = 0;
 	costoTransporte = 0;
-
+	aumentoAplicado = 0;
 
 	setbuf(stdout, NULL);
 
@@ -108,7 +108,7 @@ int main(void) {
 				case 4:
 					if(flagDatosCalculados)
 					{
-						printf("(datos)\n");
+						informarResultados(promedioPorConfederacion, costoMantenimiento, costoNeto, aumentoAplicado);
 					}
 					else
 					{
