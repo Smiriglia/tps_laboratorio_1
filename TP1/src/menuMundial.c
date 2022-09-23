@@ -11,6 +11,12 @@
 
 static void cambiarCosto(float* costoACambiar, char* tipoDeCosto);
 
+/**
+ * \fn void imprimirLinea(int)
+ * \brief Imprime una linea de guiones del tamaño ingresado
+ *
+ * \param size el tamaño que tendra la linea a imprimir
+ */
 void imprimirLinea(int size)
 {
 	for(int i = 0; i < size; i++)
@@ -19,6 +25,14 @@ void imprimirLinea(int size)
 	}
 	printf("\n");
 }
+/**
+ * \fn void ingresarCostosMantenimiento(float*, float*, float*)
+ * \brief Se ejecuta un menu para ingresar alguno de los 3 costos o volver al menu principal
+ *
+ * \param costoHospedaje el puntero del costo a cambiar
+ * \param costoComida el puntero del costo a cambiar
+ * \param costoTransporte el puntero del costo a cambiar
+ */
 void ingresarCostosMantenimiento(float* costoHospedaje, float* costoComida, float* costoTransporte)
 {
 	int respuesta;
@@ -58,6 +72,13 @@ void ingresarCostosMantenimiento(float* costoHospedaje, float* costoComida, floa
 	}while(respuesta != 4);
 }
 
+/**
+ * \fn void cambiarCosto(float*, char*)
+ * \brief Se pide un numero positivo para asignarle el valor al puntero ingresado
+ *
+ * \param costoACambiar puntero del valor a cambiar
+ * \param tipoDeCosto se utilizara para informarle al usuario el tipo de costo que cambiara
+ */
 static void cambiarCosto(float* costoACambiar, char* tipoDeCosto)
 {
 	float costoIngresado;
@@ -78,6 +99,14 @@ static void cambiarCosto(float* costoACambiar, char* tipoDeCosto)
 	}
 }
 
+/**
+ * \fn void cargarJugadores(int*, int*, int*)
+ * \brief se cargara jugadores por posicion, confederacion y camiseta mientra que no se hayan cargado anteriormente estos o el usuario quiera parar
+ *
+ * \param pFormacionCargada formacion que el usuario ya ha cargado
+ * \param formacionEquipo formacion a la que se desea llegar (sin incluir los suplentes)
+ * \param pJugadoresPorConfederacion contador de jugadores cargados en cada confederacion
+ */
 void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugadoresPorConfederacion)
 {
 	int posicionIngresada;
@@ -161,6 +190,19 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 	}while(verifica());
 	imprimirLinea(35);
 }
+
+/**
+ * \fn void realizarCalculos(int*, float*, int, float*, float*, float*)
+ * \brief Se calculara el promedio de jugadores por confederacion, y el porcentaje en la liga europea para
+ * saber si tenemos que hacer un aumento del 35% a los costos
+ *
+ * \param jugadoresPorConfederacion se dividira por el total para sacar el promedio
+ * \param pPromedioPorConfederacion se guardara el valor del promedio de cada confederacion
+ * \param costoMantenimiento se le aplicara un aumento en caso de ser necesario
+ * \param costoNeto costo con el aumento incluido
+ * \param aumentoAplicado se guardara el aumento a aplicar
+ * \param porcentajeUefa se almacenara el porcentaje de jugadores que son de la liga europea
+ */
 void realizarCalculos(
 		int* jugadoresPorConfederacion,
 		float* pPromedioPorConfederacion,
@@ -181,6 +223,16 @@ void realizarCalculos(
 		*costoNeto = costoMantenimiento + aumentoAplicado[0];
 	}
 }
+/**
+ * \fn void informarResultados(float*, float, float, float)
+ * \brief Se imprimira el promedio de jugadores por confederacion y el costo de mantenimiento
+ * en caso que se haya aplicado un aumento se informara el aumento y el valor neto
+ *
+ * \param promedioPorConfederacion promedio a imprimir
+ * \param costoMantenimiento costo a imprimir
+ * \param costoNeto costo a imprimir en caso que haya aumento
+ * \param aumentoAplicado aumento a verificar y imprimir si es mayor de 0
+ */
 void informarResultados(float* promedioPorConfederacion,float costoMantenimiento, float costoNeto, float aumentoAplicado)
 {
 	//[0]promedio de AFC, [1]promedio de CAF, [2]promedio de CONCACAF, [3]promedio de CONMEBOL, [4]promedio de UEFA, [5]promedio de OFC

@@ -17,6 +17,12 @@
 #include "menuMundial.h"
 #include "operaciones.h"
 
+/**
+ * \fn int main(void)
+ * \brief Se ejecuta un menu con opciones para la carga de jugadores y costos del mundial.
+ *
+ * \return 0 si la ejecucion fue exitosa
+ */
 int main(void) {
 	int respuesta;
 	int retornoIngreso;
