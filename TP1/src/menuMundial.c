@@ -138,7 +138,7 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 				if(pFormacionCargada[posicionIngresada] < formacionEquipo[posicionIngresada] * 2)
 				{
 					//[0]AFC, [1]CAF, [2]CONCACAF, [3]CONMEBOL, [4]UEFA, [5]OFC;
-					retornoConfederacion = retornoPosicion = utn_getNumero(&confederacionIngresada, "\t|Submenu Carga de Jugadores|\n"
+					retornoConfederacion =  utn_getNumero(&confederacionIngresada, "\t|Submenu Carga de Jugadores|\n"
 							"Confederacion:\n"
 							"0 - AFC\n"
 							"1 - CAF\n"
