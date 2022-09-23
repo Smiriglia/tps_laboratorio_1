@@ -15,5 +15,12 @@
 void ingresarCostosMantenimiento(float* costoHospedaje, float* costoComida, float* costoTransporte);
 void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugadoresPorConfederacion);
 void imprimirLinea(int tamanio);
+void realizarCalculos(
+		int* jugadoresPorConfederacion,
+		float* pPromedioPorConfederacion,
+		int costoMantenimiento,
+		float* costoNeto,
+		float* aumentoAplicado,
+		float* porcentajeUefa);
 
 #endif /* MENUMUNDIAL_H_ */

@@ -16,3 +16,11 @@ int sumaIntArray(int* pArray, int size)
 	}
 	return suma;
 }
+float calcularPorcentaje(int cantidad, int total)
+{
+	return cantidad * 100 / total;
+}
+float porcientoeDe(float porcentaje, float total)
+{
+	return total * porcentaje / 100;
+}

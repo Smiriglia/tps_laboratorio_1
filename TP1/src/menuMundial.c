@@ -102,7 +102,7 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 							"2 - Mediocampista\n"
 							"3 - Delantero\n"
 							"Eliga su opcion: ",
-							"\nERROR, OPCION INVALIDA\n", 0, 4, 3);
+							"\nERROR, OPCION INVALIDA\n", 0, 3, 3);
 			if(retornoPosicion == 0)
 			{
 				imprimirLinea(35);
@@ -158,4 +158,25 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 		imprimirLinea(35);
 		printf("¿Desea seguir ingresando jugadores?");
 	}while(verifica());
+	imprimirLinea(35);
+}
+void realizarCalculos(
+		int* jugadoresPorConfederacion,
+		float* pPromedioPorConfederacion,
+		int costoMantenimiento,
+		float* costoNeto,
+		float* aumentoAplicado,
+		float* porcentajeUefa)
+{
+	for(int i = 0; i < 6; i++)
+	{
+		pPromedioPorConfederacion[i] = (float) jugadoresPorConfederacion[i] / 22;
+	}
+	*porcentajeUefa = calcularPorcentaje(jugadoresPorConfederacion[4],22);//[4] jugadores de la uefa | 22 numero maximo de jugadores
+
+	if(porcentajeUefa[0] > 50)
+	{
+		*aumentoAplicado = porcientoeDe(35, costoMantenimiento);
+		*costoNeto = costoMantenimiento + aumentoAplicado[0];
+	}
 }

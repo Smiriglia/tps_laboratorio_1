@@ -13,6 +13,8 @@
 #include <string.h>
 
 int sumaIntArray(int* pArray, int size);
+float calcularPorcentaje(int cantidad, int total);
+porcientoeDe(float porcentaje, float total);
 
 
 #endif /* OPERACIONES_H_ */

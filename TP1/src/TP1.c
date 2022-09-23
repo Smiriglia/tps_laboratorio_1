@@ -15,6 +15,7 @@
 #include <ctype.h>
 #include "utn.h"
 #include "menuMundial.h"
+#include "operaciones.h"
 
 int main(void) {
 	int respuesta;
@@ -25,7 +26,18 @@ int main(void) {
 
 	int formacionEquipo[] = {1, 4, 4, 2};//Si cambiamos estos numeros va a afectar a la formacion seleccionada
 	int formacionCargada[] = {0, 0, 0, 0};//[0]Arqueros, [1] Defensores, [2] Mediocampistas, [3] Delanteros
-	int jugadoresPorConfederacion[] = {0, 0, 0, 0, 0, 0};//[0]AFC, [1]CAF, [2]CONCACAF, [3]CONMEBOL, [4]UEFA, [5]OFC;
+	int jugadoresPorConfederacion[] = {0, 0, 0, 0, 0, 0};//[0]AFC, [1]CAF, [2]CONCACAF, [3]CONMEBOL, [4]UEFA, [5]OFC
+	float promedioPorConfederacion[6];//[0]promedio de AFC, [1]promedio de CAF, [2]promedio de CONCACAF, [3]promedio de CONMEBOL, [4]promedio de UEFA, [5]promedio de OFC
+	float costoMantenimiento;
+	float costoNeto;
+	float aumentoAplicado;
+	float porcentajeUefa;
+
+
+
+	int flagDatosCalculados;
+
+	flagDatosCalculados = 0;
 	costoHospedaje = 0;
 	costoComida = 0;
 	costoTransporte = 0;
@@ -36,13 +48,28 @@ int main(void) {
 
 	do
 	{
-
-		retornoIngreso = utn_getNumero(&respuesta, "\t|Menu Principal|\n"
+		printf("\t|Menu Principal|\n"
 				"1 - Ingreso de los costos de Mantenimiento\n"
+				"   * El costo de hospedaje es: %.2f$\n"
+				"   * El costo de comida es: %.2f$\n"
+				"   * El costo de transporte es: %.2f$\n\n"
 				"2 - Carga de jugadores\n"
+				"   * Arqueros -> %d\n"
+				"   * Defensores -> %d\n"
+				"   * Mediocampistas -> %d\n"
+				"   * Delanteros -> %d\n\n"
 				"3 - Realizar todos los cálculos\n"
 				"4 - Informar todos los resultados\n"
-				"5 - Salir\nEliga su opcion: ",
+				"5 - Salir\n",
+				costoHospedaje,
+				costoComida,
+				costoTransporte,
+				formacionCargada[0],
+				formacionCargada[1],
+				formacionCargada[2],
+				formacionCargada[3]);
+
+		retornoIngreso = utn_getNumero(&respuesta, "Eliga su opcion: ",
 				"\nERROR, OPCION INVALIDA\n", 0, 5, 3);
 		imprimirLinea(35);
 
@@ -59,10 +86,35 @@ int main(void) {
 					break;
 
 				case 3:
+					if(sumaIntArray(formacionCargada, 4) < 22 || costoHospedaje == 0 || costoComida == 0 || costoTransporte == 0)//22 es el numero maximo de jugadores
+					{
+						printf("ERROR. No se han ingresado todos los datos\n");
+					}
+					else
+					{
+						costoMantenimiento = costoHospedaje + costoComida + costoTransporte;
 
+						realizarCalculos(jugadoresPorConfederacion,
+								promedioPorConfederacion,
+								costoMantenimiento,
+								&costoNeto,
+								&aumentoAplicado,
+								&porcentajeUefa);
+						printf("Todos los calculos se han realizado correctamente\n");
+						flagDatosCalculados = 1;
+					}
+					imprimirLinea(35);
 					break;
 				case 4:
-
+					if(flagDatosCalculados)
+					{
+						printf("(datos)\n");
+					}
+					else
+					{
+						printf("ERROR. No se pueden mostrar los datos sin haberlos calculado\n");
+					}
+					imprimirLinea(35);
 					break;
 				case 5:
 					printf("SALIR");
