@@ -4,6 +4,7 @@
  *  Created on: 22 sep. 2022
  *      Author: USUARIO
  */
+#include "operaciones.h"
 
 /**
  * \fn int sumaIntArray(int*, int)

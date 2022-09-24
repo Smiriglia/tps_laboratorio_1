@@ -101,11 +101,11 @@ int main(void) {
 						costoMantenimiento = costoHospedaje + costoComida + costoTransporte;
 
 						realizarCalculos(jugadoresPorConfederacion,
-								promedioPorConfederacion,
-								costoMantenimiento,
-								&costoNeto,
-								&aumentoAplicado,
-								&porcentajeUefa);
+									promedioPorConfederacion,
+									costoMantenimiento,
+									&costoNeto,
+									&aumentoAplicado,
+									&porcentajeUefa);
 						printf("Todos los calculos se han realizado correctamente\n");
 						flagDatosCalculados = 1;
 					}
