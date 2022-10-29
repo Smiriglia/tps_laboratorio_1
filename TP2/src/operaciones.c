@@ -66,12 +66,12 @@ float porcientoeDe(float porcentaje, float total)
  * \param cantidad es el divisor
  * \return el promedio calculado o 0 si la cantidad es 0
  */
-int calcularPromedio(float total, int cantidad)
+float calcularPromedio(float total, int cantidad)
 {
 	float promedio;
 	if(cantidad != 0)
 	{
-		promedio = total / (float) cantidad;
+		promedio = total / cantidad;
 	}
 	else
 	{

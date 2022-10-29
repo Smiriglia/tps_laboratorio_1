@@ -15,6 +15,6 @@
 int sumaIntArray(int* pArray, int size);
 float calcularPorcentaje(int cantidad, int total);
 float porcientoeDe(float porcentaje, float total);
-int calcularPromedio(float total, int cantidad);
+float calcularPromedio(float total, int cantidad);
 
 #endif /* OPERACIONES_H_ */

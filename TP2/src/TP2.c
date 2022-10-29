@@ -111,6 +111,10 @@ int main(void) {
 						printf("\nError. Debes ingresar al menos un jugador antes de poder informar datos\n\n");
 					}
 					break;
+
+				case 5:
+					printf("Salir");
+					break;
 			}
 		}
 	}while(respuesta != 5);

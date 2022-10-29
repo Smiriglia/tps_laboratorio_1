@@ -521,30 +521,33 @@ static short modificarJugador(eJugador* jugador,int tam,eConfederacion confedera
 					if(cargarNombre(jugador))
 					{
 						printf("Nombre modificado exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 				case 2:
 					if(cargarPosicion(jugador))
 					{
 						printf("Posicion modificada exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 				case 3:
 					if(cargarCamiseta(jugador))
 					{
 						printf("Numero de camiseta modificado exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 
@@ -552,10 +555,11 @@ static short modificarJugador(eJugador* jugador,int tam,eConfederacion confedera
 					if(cargarConfederacion(jugador, confederaciones, cantidadConfederaciones))
 					{
 						printf("Confederacion modificada exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 
@@ -563,10 +567,11 @@ static short modificarJugador(eJugador* jugador,int tam,eConfederacion confedera
 					if(cargarSalario(jugador))
 					{
 						printf("Salario modificado exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 
@@ -574,10 +579,11 @@ static short modificarJugador(eJugador* jugador,int tam,eConfederacion confedera
 					if(cargarAniosContrato(jugador))
 					{
 						printf("Años de contrato modificados exitosamente\n");
+						retorno = 1;
 					}
 					else
 					{
-						retorno = 1;
+						retorno = 0;
 					}
 					break;
 			}
@@ -835,7 +841,7 @@ static void informarConfederacionMayorAniosDeContrato(eJugador jugadores[],int t
 		}
 	}
 
-	if(cantidadConfederaciones > 0 && confederacionMax.isEmpty == LLENO)
+	if(cantidadConfederaciones > 0 && confederacionMax.isEmpty == LLENO && aniosDeContratoMaxConfederacion > 0)
 	{
 		printf("La confederacion con mayor cantidad de años de contrato es: %s\n", confederacionMax.nombre);
 	}
@@ -976,14 +982,14 @@ void informarRegionMasJugadores(eJugador jugadores[],int tam,eConfederacion conf
 		}
 	}
 
-	if(cantidadConfederaciones > 0 && confederacionMax.isEmpty == LLENO)
+	if(cantidadConfederaciones > 0 && confederacionMax.isEmpty == LLENO && cantidadJugadoresMaxConfederacion > 0)
 	{
 		printf("\nLa Region con mayor cantidad de jugadores es: %s Con %d Jugadores\n", confederacionMax.region, cantidadJugadoresMaxConfederacion);
 		mostrarJugadoresPorRegion(jugadores, tam, confederaciones, cantidadConfederaciones, confederacionMax.id);
 	}
 	else
 	{
-		printf("No existe una confederacion valida\n");
+		printf("No existe una region valida\n");
 	}
 }
 
