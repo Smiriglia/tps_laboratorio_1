@@ -279,9 +279,9 @@ static short cargarConfederacion(eJugador* jugador,eConfederacion confederacione
 			else
 			{
 				printf("\nError. Confederacion inexistente\n");
-				contador++;
 			}
 		}
+		contador++;
 	}
 	return retorno;
 }
