@@ -9,6 +9,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 static int esNumerica(char* cadena, int limite);
 static int getInt(int* pResultado);
 static int esFlotante(char* cadena);
@@ -18,6 +22,7 @@ static int esNombre(char* cadena,int longitud);
 static int getNombre(char* pResultado,int longitud);
 static int esDescripcion(char* cadena,int longitud);
 static int getDescripcion(char* pResultado, int longitud);
+static int getShort(short* pResultado);
 
 
 
@@ -66,7 +71,7 @@ static int getInt(int* pResultado)
     char bufferString[50];
     if(	pResultado != NULL &&
     	getString(bufferString,sizeof(bufferString)) == 0 &&
-    	esNumerica(bufferString,sizeof(bufferString)))
+    	esNumerica(bufferString,sizeof(bufferString))==1)
 	{
 		retorno=0;
 		*pResultado = atoi(bufferString) ;
@@ -87,21 +92,24 @@ static int esNumerica(char* cadena, int limite)
 	int i;
 	if(cadena != NULL && limite > 0)
 	{
-		retorno = 1; // VERDADERO
-		for(i=0;i<limite && cadena[i] != '\0';i++)
+		if(cadena[0] != '\0')
 		{
-			if(i==0 && (cadena[i] == '+' || cadena[i] == '-'))
+			retorno = 1; // VERDADERO
+			for(i=0;i<limite && cadena[i] != '\0';i++)
 			{
-				continue;
+				if(i==0 && (cadena[i] == '+' || cadena[i] == '-'))
+				{
+					continue;
+				}
+				if(cadena[i] < '0'||cadena[i] > '9')
+				{
+					retorno = 0;
+					break;
+				}
+				//CONTINUE
 			}
-			if(cadena[i] < '0'||cadena[i] > '9')
-			{
-				retorno = 0;
-				break;
-			}
-			//CONTINUE
+			//BREAK
 		}
-		//BREAK
 	}
 	return retorno;
 }
@@ -151,7 +159,7 @@ static int getFloat(float* pResultado)
 
     if(pResultado != NULL)
     {
-    	if(getString(buffer,sizeof(buffer))==0 && esFlotante(buffer))
+    	if(getString(buffer,sizeof(buffer))==0 && esFlotante(buffer)==1)
     	{
 			*pResultado = atof(buffer);
 			retorno = 0;
@@ -169,27 +177,31 @@ static int getFloat(float* pResultado)
 static int esFlotante(char* cadena)
 {
 	int i=0;
-	int retorno = 1;
+	int retorno = -1;
 	int contadorPuntos=0;
 
 	if(cadena != NULL && strlen(cadena) > 0)
 	{
-		for(i=0 ; cadena[i] != '\0'; i++)
+		if(!(strlen(cadena)==0 && cadena[0]=='\0'))
 		{
-			if(i==0 && (cadena[i] == '-' || cadena[i] == '+'))
+			retorno = 1;
+			for(i=0 ; cadena[i] != '\0'; i++)
 			{
-				continue;
-			}
-			if(cadena[i] < '0' || cadena[i] > '9' )
-			{
-				if(cadena[i] == '.' && contadorPuntos == 0)
+				if(i==0 && (cadena[i] == '-' || cadena[i] == '+'))
 				{
-					contadorPuntos++;
+					continue;
 				}
-				else
+				if(cadena[i] < '0' || cadena[i] > '9' )
 				{
-					retorno = 0;
-					break;
+					if(cadena[i] == '.' && contadorPuntos == 0)
+					{
+						contadorPuntos++;
+					}
+					else
+					{
+						retorno = 0;
+						break;
+					}
 				}
 			}
 		}
@@ -325,7 +337,7 @@ static int getDescripcion(char* pResultado, int longitud)
     if(pResultado != NULL)
     {
     	if(	getString(buffer,sizeof(buffer))==0 &&
-    		esDescripcion(buffer,sizeof(buffer)) &&
+    		esDescripcion(buffer,sizeof(buffer))==1 &&
 			strnlen(buffer,sizeof(buffer))<longitud)
     	{
     		strncpy(pResultado,buffer,longitud);
@@ -344,16 +356,19 @@ static int getDescripcion(char* pResultado, int longitud)
 static int esDescripcion(char* cadena,int longitud)
 {
 	int i=0;
-	int retorno = 1;
-
+	int retorno = -1;
 	if(cadena != NULL && longitud > 0)
 	{
-		for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
+		if(!(strlen(cadena) == 0 && cadena[0] == '\0'))
 		{
-			if(cadena[i] != '.' && cadena[i] != ' ' && (cadena[i] < 'A' || cadena[i] > 'Z' ) && (cadena[i] < 'a' || cadena[i] > 'z' ) && (cadena[i] < '0' || cadena[i] > '9' ) )
+			retorno =1;
+			for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
 			{
-				retorno = 0;
-				break;
+				if(cadena[i] != ' ' && (cadena[i] < 'A' || cadena[i] > 'Z' ) && (cadena[i] < 'a' || cadena[i] > 'z' ))
+				{
+					retorno = 0;
+					break;
+				}
 			}
 		}
 	}
@@ -367,7 +382,7 @@ static int esDescripcion(char* cadena,int longitud)
  * \param mensaje Es el mensaje a ser mostrado
  * \param mensajeError Es el mensaje de Error a ser mostrado
  * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo el numero flotante y -1 si no
+ * \return Retorna 0 si se obtuvo la cadena de caracteres y -1 si no
  *
  */
 int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
@@ -443,4 +458,46 @@ int utn_getDni(char* pResultado, int longitud,char* mensaje, char* mensajeError,
 		printf("%s",mensajeError);
 	}
 	return retorno;
+}
+int utn_getNumeroShort(short* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+{
+	int retorno = -1;
+	short bufferInt;
+	do
+	{
+		printf("%s",mensaje);
+		if(	getShort(&bufferInt) == 0 &&
+			bufferInt >= minimo &&
+			bufferInt <= maximo)
+		{
+			retorno = 0;
+			*pResultado = bufferInt;
+			break;
+		}
+		printf("%s",mensajeError);
+		reintentos--;
+	}while(reintentos>=0);
+
+	return retorno;
+}
+
+/**
+ * \brief Obtien un numero entero
+ * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
+ * \return Retorna 0 (EXITO) si se obtiene un numero entero y -1 (ERROR) si no
+ *
+ */
+static int getShort(short* pResultado)
+{
+    int retorno=-1;
+    char bufferString[50];
+    if(	pResultado != NULL &&
+    	getString(bufferString,sizeof(bufferString)) == 0 &&
+    	esNumerica(bufferString,sizeof(bufferString))==1)
+	{
+		retorno=0;
+		*pResultado = atoi(bufferString) ;
+
+	}
+    return retorno;
 }

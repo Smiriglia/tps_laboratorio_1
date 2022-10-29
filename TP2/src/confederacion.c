@@ -11,12 +11,20 @@
 #include "jugador.h"
 #include "confederacion.h"
 
-static short buscarConfederacionVacia(eConfederacion confederaciones[], int tam);
+static int buscarConfederacionVacia(eConfederacion confederaciones[], int tam);
 static short cargarNombre(eConfederacion* pConfederacion);
 static short cargarRegion(eConfederacion* pConfederacion);
 static short cargarAnio(eConfederacion* pConfederacion);
 static short modificarConfederacion(eConfederacion* pConfederacion);
 
+/**
+ * \fn void mostrarConfederaciones(eConfederacion[], int)
+ * \brief Recorre un array de confederaciones dado y muestra las confederaciones que no esten vacias
+ * Mostrando los datos "ID","Nombre", "Region", "Año de creacion" de las mismas
+ *
+ * \param confederaciones Array de confederaciones a mostrar
+ * \param cantidadConfederaciones Tamaño del array de confederaciones
+ */
 void mostrarConfederaciones(eConfederacion confederaciones[], int cantidadConfederaciones)
 {
 	int i;
@@ -34,6 +42,16 @@ void mostrarConfederaciones(eConfederacion confederaciones[], int cantidadConfed
 	printf("=================================================================\n");
 }
 
+/**
+ * \fn int buscarConfederacionPorId(eConfederacion[], int, int)
+ * \brief Recorre un array de confederaciones hasta encontrar una confederacion que no este vacia
+ * y que su id coincida con el id dado
+ *
+ * \param confederaciones Array de confederaciones a recorrer
+ * \param cantidadConfederaciones Tamaño del array de confederaciones
+ * \param idABuscar Id a verificar
+ * \return El indice de la confederacion que coincide con el id dado o -1 en caso que no exista
+ */
 int buscarConfederacionPorId(eConfederacion confederaciones[],int cantidadConfederaciones,int idABuscar)
 {
 	int retorno = -1;
@@ -49,6 +67,17 @@ int buscarConfederacionPorId(eConfederacion confederaciones[],int cantidadConfed
 	return retorno;
 }
 
+/**
+ * \fn short altaConfederacion(eConfederacion[], int*, int)
+ * \brief Pide el ingreso de cada uno de los datos necesarios
+ *  para cargar a una confederacion en el sistema y los valida
+ *
+ * \param confederaciones Array de confederaciones donde sera cargado
+ * \param legajoConfederaciones Puntero de la id autoincremental de las confederaciones
+ * \param tam Tamaño del array de confederaciones
+ *
+ * \return 1 Si la alta fue exitosa o 0 Si no lo fue
+ */
 short altaConfederacion(eConfederacion confederaciones[],int* legajoConfederaciones, int tam)
 {
 	int indice;
@@ -91,7 +120,16 @@ short altaConfederacion(eConfederacion confederaciones[],int* legajoConfederacio
 	return retorno;
 }
 
-static short buscarConfederacionVacia(eConfederacion confederaciones[], int tam)
+/**
+ * \fn short buscarConfederacionVacia(eConfederacion[], int)
+ * \brief Busca una Confederacion con estado vacio en un array de Confederacion
+ *
+ * \param confederaciones Array de confederaciones a recorrer
+ * \param tam Tamaño del array de confederaciones
+ *
+ * \return el indice del Confederacion vacio en caso de encontrarlo o -1 en caso de no encontrar una confederacion vacia
+ */
+static int buscarConfederacionVacia(eConfederacion confederaciones[], int tam)
 {
 	int retorno = -1;
 	int i;
@@ -105,6 +143,15 @@ static short buscarConfederacionVacia(eConfederacion confederaciones[], int tam)
 	}
 	return retorno;
 }
+
+/**
+ * \fn short cargarNombre(eConfederacion*)
+ * \brief Pide al jugador que ingrese un nombre el cual se le asignara a la confederacion despues de validarlo
+ *
+ * \param pConfederacion Puntero de la confederacion a cargar
+ *
+ * \return 1 Si la carga fue exitosa o 0 en caso contrario
+ */
 static short cargarNombre(eConfederacion* pConfederacion)
 {
 	short retorno = 0;
@@ -117,6 +164,14 @@ static short cargarNombre(eConfederacion* pConfederacion)
 	return retorno;
 }
 
+/**
+ * \fn short cargarRegion(eConfederacion*)
+ * \brief Pide al usuario que ingrese la region la cual sera validada y asignada a la confederacion
+ *
+ * \param pConfederacion Puntero de la confederacion a cargar
+ *
+ * \return 1 Si la carga fue exitosa o 0 en caso contrario
+ */
 static short cargarRegion(eConfederacion* pConfederacion)
 {
 	short retorno = 0;
@@ -129,6 +184,14 @@ static short cargarRegion(eConfederacion* pConfederacion)
 	return retorno;
 }
 
+/**
+ * \fn short cargarAnio(eConfederacion*)
+ * \brief Pide al usuario que ingrese el año de creacion el cual sera validado y asignado a la confederacion
+ *
+ * \param pConfederacion Puntero de la confederacion a cargar
+ *
+ * \return 1 Si la carga fue exitosa o 0 en caso contrario
+ */
 static short cargarAnio(eConfederacion* pConfederacion)
 {
 
@@ -143,6 +206,16 @@ static short cargarAnio(eConfederacion* pConfederacion)
 	return retorno;
 }
 
+/**
+ * \fn short bajaConfederacion(eConfederacion[], int)
+ * \brief Se muestra la lista de confederaciones y se pide al usuario que ingrese el
+ * id de la confederacion a eliminar (baja logica)
+ *
+ * \param confederaciones Array de confederaciones a mostrar
+ * \param tam Tamaño del array de confederaciones
+ *
+ * \return 1 Si la baja fue exitosa o 0 Si la baja no fue exitosa
+ */
 short bajaConfederacion(eConfederacion confederaciones[], int tam)
 {
 	short retorno = 0;
@@ -164,6 +237,17 @@ short bajaConfederacion(eConfederacion confederaciones[], int tam)
 	return retorno;
 }
 
+/**
+ * \fn short modificarConfederaciones(eConfederacion[], int)
+ * \brief Muestra todas las confederaciones que no esten vacias y
+ * pide al usuario que ingrese el id de la confederacion que desea
+ * modificar
+ *
+ * \param confederaciones Array de confederaciones a mostrar
+ * \param tam Tamaño del array de confederaciones
+ *
+ * \return 1 si la modificacion fue exitosa o 0 si la modificacion no fue exitosa
+ */
 short modificarConfederaciones(eConfederacion confederaciones[], int tam)
 {
 	short retorno = 0;
@@ -183,6 +267,14 @@ short modificarConfederaciones(eConfederacion confederaciones[], int tam)
 	return retorno;
 }
 
+/**
+ * \fn short modificarConfederacion(eConfederacion*)
+ * \brief Se muestra un submenu de modificacion en el cual el usuario puede elegir que dato de la confederacion modificara
+ *
+ * \param pConfederacion El puntero de la confederacion a modificar
+ *
+ * \return 1 si la modificacion fue exitosa o 0 Si la modificacion no fue exitosa
+ */
 static short modificarConfederacion(eConfederacion* pConfederacion)
 {
 	int retorno = 0;

@@ -53,10 +53,19 @@ float porcientoeDe(float porcentaje, float total)
 {
 	float retorno;
 
-	porcentaje = total * porcentaje / 100;
+	retorno = total * porcentaje / 100;
+
 	return retorno;
 }
 
+/**
+ * \fn int calcularPromedio(float, int)
+ * \brief Calcula el promedio dividiendo el total sobre la cantidad
+ *
+ * \param total es el dividendo
+ * \param cantidad es el divisor
+ * \return el promedio calculado o 0 si la cantidad es 0
+ */
 int calcularPromedio(float total, int cantidad)
 {
 	float promedio;

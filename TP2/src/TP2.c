@@ -15,7 +15,13 @@
 #include "confederacion.h"
 
 #define MAX_JUGADORES 3000
-
+/**
+ * \fn int main(void)
+ * \brief El programa que administra los jugadores de cada confederación de fútbol.
+ * contando con un menu  de 4 opciones Ingresar Jugador, Eliminar jugador, Modificar Jugador y informar los datos
+ *
+ * \return 0
+ */
 int main(void) {
 	setbuf(stdout,NULL);
 	int respuesta;
