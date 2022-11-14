@@ -220,10 +220,21 @@ int main()
 		}
     }while(option != 11);
 
-    ll_clear(listaJugadores);
-    ll_deleteLinkedList(listaJugadores);
-    ll_clear(listaSelecciones);
-    ll_deleteLinkedList(listaSelecciones);
+    if(listaJugadores != NULL)
+    {
+		ll_clear(listaJugadores);
+		ll_deleteLinkedList(listaJugadores);
+    }
+    if(listaSelecciones != NULL)
+    {
+		ll_clear(listaSelecciones);
+		ll_deleteLinkedList(listaSelecciones);
+    }
+    if(listaJugadoresConfederacion != NULL)
+    {
+		ll_clear(listaJugadoresConfederacion);
+		ll_deleteLinkedList(listaJugadoresConfederacion);
+    }
     return 0;
 }
 
