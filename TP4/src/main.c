@@ -45,7 +45,6 @@ int main(void)
 	startTesting(17); // ll_subList
 	startTesting(18); // ll_clone
 	startTesting(19); // ll_sort
-
     return 0;
 }
 
