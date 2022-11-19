@@ -21,7 +21,8 @@ void realizarCalculos(
 		int costoMantenimiento,
 		float* costoNeto,
 		float* aumentoAplicado,
-		float* porcentajeUefa);
+		float* porcentajeUefa,
+		int cantidadJugadores);
 void informarResultados(float* promedioPorConfederacion,float costoMantenimiento, float costoNeto, float aumentoAplicado);
 
 #endif /* MENUMUNDIAL_H_ */

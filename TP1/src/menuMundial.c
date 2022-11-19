@@ -152,7 +152,6 @@ void cargarJugadores(int* pFormacionCargada, int* formacionEquipo, int* pJugador
 					{
 						imprimirLinea(35);
 						retornoNumeroCamisetaIngresado = utn_getNumero(&numeroCamisetaIngresado, "\t|Submenu Carga de Jugadores|\n"
-								"Numero de camiseta:\n"
 								"Ingrese el numero de camiseta: ",
 								"\nERROR, NUMERO INVALIDA\n", 1, 99, 3);
 						if(retornoNumeroCamisetaIngresado == 0)
@@ -209,13 +208,14 @@ void realizarCalculos(
 		int costoMantenimiento,
 		float* costoNeto,
 		float* aumentoAplicado,
-		float* porcentajeUefa)
+		float* porcentajeUefa,
+		int cantidadJugadores)
 {
 	for(int i = 0; i < 6; i++)
 	{
-		pPromedioPorConfederacion[i] = (float) jugadoresPorConfederacion[i] / 22;
+		pPromedioPorConfederacion[i] = calcularPromedio((float) jugadoresPorConfederacion[i], cantidadJugadores);
 	}
-	*porcentajeUefa = calcularPorcentaje(jugadoresPorConfederacion[4],22);//[4] jugadores de la uefa | 22 numero maximo de jugadores
+	*porcentajeUefa = calcularPorcentaje(jugadoresPorConfederacion[4],cantidadJugadores);//[4] jugadores de la uefa
 
 	if(porcentajeUefa[0] > 50)
 	{

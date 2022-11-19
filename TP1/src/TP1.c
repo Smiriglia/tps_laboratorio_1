@@ -92,7 +92,7 @@ int main(void) {
 					break;
 
 				case 3:
-					if(sumaIntArray(formacionCargada, 4) < 22 || costoHospedaje == 0 || costoComida == 0 || costoTransporte == 0)//22 es el numero maximo de jugadores
+					if(sumaIntArray(formacionCargada, 4) < 1 || costoHospedaje == 0 || costoComida == 0 || costoTransporte == 0)//22 es el numero maximo de jugadores
 					{
 						printf("ERROR. No se han ingresado todos los datos\n");
 					}
@@ -105,7 +105,8 @@ int main(void) {
 									costoMantenimiento,
 									&costoNeto,
 									&aumentoAplicado,
-									&porcentajeUefa);
+									&porcentajeUefa,
+									sumaIntArray(formacionCargada, 4));
 						printf("Todos los calculos se han realizado correctamente\n");
 						flagDatosCalculados = 1;
 					}
