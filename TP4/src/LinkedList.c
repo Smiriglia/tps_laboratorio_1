@@ -564,3 +564,96 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
     return returnAux;
 
 }
+
+/**
+ * \fn int ll_erase(LinkedList*)
+ * \brief Borra la linked list dada junto a sus elementos y nodos
+ *
+ * \param this
+ * \return 0 si fue exitoso, -1 si no lo fue
+ */
+int ll_erase(LinkedList* this)
+{
+	Node* nodeAux;
+	void* element;
+	int retorno = -1;
+	if(this != NULL)
+	{
+		while(ll_isEmpty(this) == 1)
+		{
+			nodeAux = ll_pop(this, 0);
+			if(nodeAux != NULL)
+			{
+				element = nodeAux->pElement;
+				if(element != NULL)
+				{
+					free(element);
+				}
+				free(nodeAux);
+			}
+		}
+		retorno = ll_deleteLinkedList(this);
+	}
+	return retorno;
+}
+/**
+ * \fn int ll_map(LinkedList*, int(*)(void*))
+ * \brief Recorre la linked list dada y utiliza la funcion dada en cada uno de los elementos
+ * la cual esta destinada a modificar un campo deseado de un puntero a estructura
+ *
+ * \param this
+ * \param pSet
+ * \return 0 si fue exitoso, -1 si no lo fue
+ */
+int ll_map(LinkedList* this, int (*pSet)(void*))
+{
+	int i;
+	int tam;
+	void* element;
+	int retorno = -1;
+	if(this != NULL && pSet != NULL)
+	{
+		tam = ll_len(this);
+		for(i = 0; i < tam; i++)
+		{
+			element = ll_get(this, i);
+			if(element != NULL)
+			{
+				retorno = (*pSet)(element);
+			}
+		}
+	}
+	return retorno;
+}
+
+/**
+ * \fn int ll_filter*(LinkedList*, int(*)(void*))
+ * \brief Se recorrera una linked list y dependiendo del
+ * resultado de la funcion dada si el objeto quedara en la
+ * lista final, si es 0 el item permanecera y si es 1 el
+ * item sera eliminado de la lista
+ *
+ * \param this
+ * \param pCompare
+ * \return -1 En caso de error, 0 En caso de que haya sido exitoso
+ */
+int ll_filter(LinkedList* this, int (*pCompare)(void*))
+{
+	int i;
+	int tam;
+	void* element;
+	int retorno = -1;
+	if(this != NULL && pCompare != NULL)
+	{
+		tam = ll_len(this);
+		for(i = 0; i < tam; i++)
+		{
+			element = ll_get(this, i);
+			if(element != NULL && (*pCompare)(element) == 1)
+			{
+				retorno = ll_remove(this, i);
+			}
+		}
+	}
+	return retorno;
+}

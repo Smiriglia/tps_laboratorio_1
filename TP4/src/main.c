@@ -22,11 +22,15 @@
 #include <string.h>
 #include "../testing/inc/main_test.h"
 #include "../inc/LinkedList.h"
+#include "../inc/inputs.h"
 
 
 int main(void)
 {
-	startTesting(1);  // ll_newLinkedList
+	setbuf(stdout,NULL);
+	int option;
+
+	/*startTesting(1);  // ll_newLinkedList
 	startTesting(2);  // ll_len
 	startTesting(3);  // getNode - test_getNode
 	startTesting(4);  // addNode - test_addNode
@@ -44,7 +48,39 @@ int main(void)
 	startTesting(16); // ll_containsAll
 	startTesting(17); // ll_subList
 	startTesting(18); // ll_clone
-	startTesting(19); // ll_sort
+	startTesting(19); // ll_sort*/
+	do{
+	    	printf("\t|Menu Principal|\n"
+	    					"1  - Cargar Archivos\n"
+	    					"2  - Ingresar Jugador\n"
+	    					"3  - Modificar jugador\n"
+	    					"4  - Eliminar Jugador\n"
+	    					"5  - Listar\n"
+	    					"6  - Convocar y Desconvocar Jugadores\n"
+	    					"7 - Salir\n");
+
+			if(utn_getNumero(&option, "Eliga su opcion: ","\nERROR, OPCION INVALIDA\n", 1, 7, 3)== 0)
+	        switch(option)
+	        {
+	        	case 1:
+	        		break;
+
+	        	case 2:
+	        		break;
+
+	        	case 3:
+	        		break;
+
+	        	case 4:
+	        		break;
+
+	        	case 5:
+	        		break;
+
+	        	case 6:
+	        		break;
+	        }
+		}while(option != 7);
     return 0;
 }
 
